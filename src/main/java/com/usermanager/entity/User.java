@@ -3,6 +3,7 @@ package com.usermanager.entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -17,6 +18,9 @@ public class User {
 
     @Column(unique=true, nullable=false)
     private String email;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private Role role;
 
     public Long getId() {
         return id;
@@ -48,5 +52,17 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public String getRoleString() {
+        return role.toString();
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
