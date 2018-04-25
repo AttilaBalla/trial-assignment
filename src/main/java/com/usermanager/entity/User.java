@@ -1,6 +1,9 @@
 package com.usermanager.entity;
 
+import org.hibernate.validator.constraints.Email;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.util.HashMap;
 
 @Entity
@@ -15,9 +18,11 @@ public class User {
     private String userName;
 
     @Column(nullable = false)
+    @Min(message = "Password must be at least 6 characters long!", value = 6)
     private String userPassword;
 
     @Column(unique=true, nullable=false)
+    @Email(message = "E-mail address is invalid!")
     private String userEmail;
 
     @ManyToOne(cascade = CascadeType.MERGE)

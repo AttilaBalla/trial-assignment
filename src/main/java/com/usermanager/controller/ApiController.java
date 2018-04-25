@@ -4,6 +4,7 @@ import com.usermanager.entity.json.ResponseJson;
 import com.usermanager.entity.json.UserJson;
 import com.usermanager.service.UserService;
 import com.usermanager.utility.JsonUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +14,7 @@ public class ApiController {
 
     private UserService userService;
 
+    @Autowired
     public ApiController(UserService userService) {
         this.userService = userService;
     }
@@ -26,11 +28,9 @@ public class ApiController {
     @PostMapping(value = "/register")
     public String registerUser(@RequestBody UserJson userJson) {
 
-        ResponseJson response = userService.validateUserDetails(userJson);
+        ResponseJson response = new ResponseJson(true);
 
-        if(response.isSuccess()) {
-            userService.registerUser(userJson);
-        }
+        userService.registerUser(userJson);
 
         return JsonUtil.toJson(response);
     }

@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -66,42 +67,6 @@ public class UserService implements UserDetailsService {
 
     }
 
-    public ResponseJson validateUserDetails(UserJson userJson) {
-
-        String userName = userJson.getUserName();
-        String email = userJson.getUserEmail();
-        String password = userJson.getUserPassword();
-
-        ResponseJson response = new ResponseJson(true);
-
-        if(password.length() < 6) {
-            response.setSuccess(false);
-            response.setInformation("This password is too short!");
-
-            return response;
-        }
-
-        User user = userRepository.findUserByUserName(userName);
-
-        if(user != null) {
-            response.setSuccess(false);
-            response.setInformation("This username is already in use!");
-
-            return response;
-        }
-
-        user = userRepository.findUserByUserEmail(email);
-
-        if(user != null) {
-            response.setSuccess(false);
-            response.setInformation("This e-mail address is already in use!");
-
-            return response;
-        }
-
-        return response;
-    }
-
     public void registerUser(UserJson userJson) {
 
         Role userRole = roleRepository.findByRoleType(RoleType.ROLE_USER);
@@ -110,9 +75,13 @@ public class UserService implements UserDetailsService {
         String password = BCrypt.hashpw(userJson.getUserPassword(), BCrypt.gensalt());
 
         User user = new User(userName, password, userJson.getUserEmail(), userRole);
-        userRepository.save(user);
+        saveUser(user);
 
         logger.info("A new user has been added: {}", userName);
+    }
+
+    private void saveUser(@Valid User user) {
+        userRepository.save(user);
     }
 
     public List<HashMap<String, String>> getUsers() {
