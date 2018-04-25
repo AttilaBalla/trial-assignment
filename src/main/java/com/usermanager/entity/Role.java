@@ -15,8 +15,15 @@ public class Role {
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
 
-    @OneToMany(mappedBy = "role", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "userRole", cascade = CascadeType.MERGE)
     private Set<User> users = new HashSet<>();
+
+    public Role() {
+    }
+
+    public Role(RoleType roleType) {
+        this.roleType = roleType;
+    }
 
     public Long getId() {
         return id;
