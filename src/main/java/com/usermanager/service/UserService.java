@@ -17,6 +17,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -121,5 +123,23 @@ public class UserService implements UserDetailsService {
                 .stream()
                 .map(user -> ( user.getSimpleUserDetails()))
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public ResponseJson deleteUser(long userId) {
+        ResponseJson response = new ResponseJson(true);
+
+        User user = userRepository.findUserById(userId);
+
+        if(user == null) {
+            response.setSuccess(false);
+            response.setInformation("No user exists with such ID!");
+            return response;
+        }
+
+        userRepository.deleteUserById(userId);
+        logger.info("A user has been deleted: ID: {}, username: {}", userId, user.getUserName());
+
+        return response;
     }
 }

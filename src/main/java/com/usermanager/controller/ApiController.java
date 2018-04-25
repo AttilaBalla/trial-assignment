@@ -48,4 +48,10 @@ public class ApiController {
             return JsonUtil.toJson(users);
         }
     }
+
+    @DeleteMapping(value = "/delete")
+    public String deleteUser(@RequestParam(value="userId", required=false) long userId) {
+
+        return JsonUtil.toJson(userService.deleteUser(userId));
+    }
 }
