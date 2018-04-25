@@ -11,16 +11,25 @@ public class User {
     private Long id;
 
     @Column(unique = true, nullable = false)
-    private String username;
+    private String userName;
 
     @Column(nullable = false)
-    private String password;
+    private String userPassword;
 
     @Column(unique=true, nullable=false)
-    private String email;
+    private String userEmail;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     private Role role;
+
+    public User() {
+    }
+
+    public User(String userName, String password, String email) {
+        this.userEmail = email;
+        this.userName = userName;
+        this.userPassword = password;
+    }
 
     public Long getId() {
         return id;
@@ -30,28 +39,28 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getUserPassword() {
+        return userPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public Role getRole() {
