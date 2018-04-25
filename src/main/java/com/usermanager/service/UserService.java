@@ -1,9 +1,11 @@
 package com.usermanager.service;
 
+import com.usermanager.entity.Role;
 import com.usermanager.entity.RoleType;
 import com.usermanager.entity.User;
 import com.usermanager.entity.json.ResponseJson;
 import com.usermanager.entity.json.UserJson;
+import com.usermanager.repository.RoleRepository;
 import com.usermanager.repository.UserRepository;
 import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
@@ -16,7 +18,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -24,10 +28,12 @@ public class UserService implements UserDetailsService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private UserRepository userRepository;
+    private RoleRepository roleRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     @Override
@@ -96,12 +102,24 @@ public class UserService implements UserDetailsService {
 
     public void registerUser(UserJson userJson) {
 
+        Role userRole = roleRepository.findByRoleType(RoleType.ROLE_USER);
+
         String userName = userJson.getUserName();
         String password = BCrypt.hashpw(userJson.getUserPassword(), BCrypt.gensalt());
 
-        User user = new User(userName, password, userJson.getUserEmail());
+        User user = new User(userName, password, userJson.getUserEmail(), userRole);
         userRepository.save(user);
 
         logger.info("A new user has been added: {}", userName);
+    }
+
+    public List<HashMap<String, String>> getUsers() {
+
+        List<User> users = userRepository.findAll();
+
+        return users
+                .stream()
+                .map(user -> ( user.getSimpleUserDetails()))
+                .collect(Collectors.toList());
     }
 }

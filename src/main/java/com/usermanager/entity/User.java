@@ -1,6 +1,7 @@
 package com.usermanager.entity;
 
 import javax.persistence.*;
+import java.util.HashMap;
 
 @Entity
 @Table(name = "users")
@@ -20,15 +21,26 @@ public class User {
     private String userEmail;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    private Role role;
+    private Role userRole;
 
     public User() {
     }
 
-    public User(String userName, String password, String email) {
+    public User(String userName, String password, String email, Role userRole) {
         this.userEmail = email;
         this.userName = userName;
         this.userPassword = password;
+        this.userRole = userRole;
+    }
+
+    public HashMap<String, String> getSimpleUserDetails() {
+        HashMap<String, String> userData = new HashMap<>();
+        userData.put("id", id.toString());
+        userData.put("username", userName);
+        userData.put("email", userEmail);
+        userData.put("role", userRole.getRoleType().toString());
+
+        return userData;
     }
 
     public Long getId() {
@@ -64,14 +76,14 @@ public class User {
     }
 
     public Role getRole() {
-        return role;
+        return userRole;
     }
 
     public String getRoleString() {
-        return role.toString();
+        return userRole.toString();
     }
 
     public void setRole(Role role) {
-        this.role = role;
+        this.userRole = role;
     }
 }

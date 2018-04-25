@@ -5,6 +5,8 @@ import com.usermanager.entity.json.UserJson;
 import com.usermanager.service.UserService;
 import com.usermanager.utility.JsonUtil;
 import org.springframework.web.bind.annotation.*;
+import java.util.HashMap;
+import java.util.List;
 
 @RestController
 public class ApiController {
@@ -31,5 +33,19 @@ public class ApiController {
         }
 
         return JsonUtil.toJson(response);
+    }
+
+    @GetMapping(value = "/users")
+    public String listUsers() {
+        List<HashMap<String, String>> users = userService.getUsers();
+
+        if(users.size() < 1) {
+
+            return JsonUtil.toJson( new ResponseJson(true, "No users in the database at this time."));
+        }
+        else {
+
+            return JsonUtil.toJson(users);
+        }
     }
 }
