@@ -8,6 +8,7 @@ import com.usermanager.entity.json.UserJson;
 import com.usermanager.repository.RoleRepository;
 import com.usermanager.repository.UserRepository;
 import org.mindrot.jbcrypt.BCrypt;
+import org.postgresql.util.PSQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -67,21 +69,29 @@ public class UserService implements UserDetailsService {
 
     }
 
-    public void registerUser(UserJson userJson) {
-
-        Role userRole = roleRepository.findByRoleType(RoleType.ROLE_USER);
+    public void registerUser(UserJson userJson) throws ConstraintViolationException, IllegalArgumentException {
 
         String userName = userJson.getUserName();
+        String userEmail = userJson.getUserEmail();
+
+        if(userRepository.findUserByUserName(userName) != null || userRepository.findUserByUserEmail(userEmail) != null) {
+            throw new IllegalArgumentException(
+                    "User with these credentials already exists!" + userEmail + ", " + userName
+            );
+        }
+
+        Role userRole = roleRepository.findByRoleType(RoleType.ROLE_USER);
         String password = BCrypt.hashpw(userJson.getUserPassword(), BCrypt.gensalt());
 
         User user = new User(userName, password, userJson.getUserEmail(), userRole);
         saveUser(user);
 
-        logger.info("A new user has been added: {}", userName);
     }
 
-    private void saveUser(@Valid User user) {
+    private void saveUser(@Valid User user) throws ConstraintViolationException {
+
         userRepository.save(user);
+        logger.info("A new user has been added: {}", user.getUserName());
     }
 
     public List<HashMap<String, String>> getUsers() {
