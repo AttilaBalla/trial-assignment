@@ -1,4 +1,4 @@
-package com.usermanager.utility;
+package com.usermanager.config;
 
 import com.usermanager.entity.Role;
 import com.usermanager.entity.RoleType;
