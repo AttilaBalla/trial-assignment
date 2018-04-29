@@ -75,3 +75,6 @@ body {
     cursor: pointer;
 }
 
+.alert {
+    border-radius: 0;
+}

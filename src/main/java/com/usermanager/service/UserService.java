@@ -8,7 +8,6 @@ import com.usermanager.entity.json.UserJson;
 import com.usermanager.repository.RoleRepository;
 import com.usermanager.repository.UserRepository;
 import org.mindrot.jbcrypt.BCrypt;
-import org.postgresql.util.PSQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
