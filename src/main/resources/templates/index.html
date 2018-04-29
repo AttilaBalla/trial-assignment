@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <!-- Latest compiled and minified bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"/>
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- Latest compiled bootstrap JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+        <!-- Font AWESOMEEEEEE-->
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <!-- Google Open Sans font-->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet"/>
+        <!-- Local CSS-->
+        <link rel="stylesheet" href="/static/css/main.css"/>
+    </head>
+    <body>
+        <div id="main_container">
+            <nav class="navbar navbar-expand-sm">
+                <div id="nav_title">
+                    <h2>User Manager</h2>
+                    <h6>Kulcs-Soft trial assignment</h6>
+                </div>
+                <div class="navbar-nav ml-auto">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-toggle="modal" data-target="#register_modal">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-toggle="modal" data-target="#login_modal">Login</a>
+                        </li>
+                    </ul>       
+                </div>
+            </nav>
+            <div id="user_cards">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                        User ID
+                        </div>
+                        <div class="col">
+                        User name
+                        </div>
+                        <div class="col">
+                        E-mail address
+                        </div>
+                        <div class="col">
+                        Actions
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                        1
+                        </div>
+                        <div class="col">
+                        XAttus
+                        </div>
+                        <div class="col">
+                        xattus@gmail.com
+                        </div>
+                        <div class="col">
+                            <a class="text-dark" href="#" data-toggle="modal" data-target="#delete_modal">
+                                <span class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Delete"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                            <div class="col">
+                            2
+                            </div>
+                            <div class="col">
+                            XAttus
+                            </div>
+                            <div class="col">
+                            xattus@gmail.com
+                            </div>
+                            <div class="col">
+                                <a class="text-dark" href="#" data-toggle="modal" data-target="#delete_modal">
+                                    <span class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Delete"></span>
+                                </a>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+       <!-- Register Modal -->
+        <div class="modal fade" id="register_modal" tabindex="-1" role="dialog" aria-labelledby="register_modal_label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="register_modal_label">Register a new user account</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form name="login" th:action="@{/login}" method="post" class="form-signin">
+                        <div class="modal-body"> 
+                            <div class="input_field">
+                                <label for="username" class="sr-only">name</label>
+                                <input type="text" id="username" name="username" class="form-control" placeholder="Your name" required="true" /> 
+                            </div>
+                            <div class="input_field">
+                                <label for="email" class="sr-only">e-mail address</label>
+                                <input type="text" id="email" name="email" class="form-control" placeholder="Your e-mail address" required="true" /> 
+                            </div>
+                                <div class="input_field">
+                                <label for="password" class="sr-only">password</label> 
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Your password" required="true" />
+                            </div>
+                            <div class="input_field">
+                                <label for="password_again" class="sr-only">password again</label>
+                                <input type="password" id="password_again" name="password_again" class="form-control" placeholder="re-enter password" required="true" />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-orangered register_user_button">Register account</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Login Modal -->
+        <div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="login_modal_label" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="login_modal_label">Log in</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form name="login" th:action="@{/login}" method="post" class="form-signin">
+                            <div class="modal-body"> 
+                                <div class="input_field">
+                                    <label for="username" class="sr-only">name</label>
+                                    <input type="text" id="username" name="username" class="form-control" placeholder="Your name" required="true" /> 
+                                </div>
+                                <div class="input_field">
+                                    <label for="password" class="sr-only">password</label> 
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="Your password" required="true" />
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-orangered login_user_button">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- delete confirm Modal -->
+            <div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="delete_modal_label" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="delete_modal_label">Confirm action</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body"> 
+                                <p>Are You sure you want to delete this account?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger delete_user_button">Delete Account</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </body>
+</html>

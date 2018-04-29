@@ -1,0 +1,77 @@
+body {
+    background-color: rgb(235, 235, 235);
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+#main_container {
+    margin-top: 35px;
+    background-color: white;
+    box-shadow: 0 15px 30px rgba(50, 50, 60, 0.75);
+    max-width: 1000px;
+    height: 500px;
+    margin: auto;
+}
+
+#nav_title {
+    text-align: center;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    min-height: 80px;
+    background-color: orangered;
+    color: white;
+}
+
+.navbar p {
+    margin: 0;
+}
+
+.nav-link {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    color: yellow;
+}
+
+#user_cards {
+    padding: 30px;
+}
+
+.btn-orangered {
+    color: #fff;
+    background-color: orangered;
+    box-shadow: 0px 0px 0px;
+    transition: background-color 0.5s, box-shadow 0.5s;
+    transition-timing-function: ease;
+}
+
+.btn-orangered:hover {
+    cursor: pointer;
+    background-color: orange;
+    box-shadow: 0px 0px 10px orange;
+}
+
+.input_field {
+    margin: 30px 0 30px 0;
+}
+
+.input_field input {
+    font-size: 20px;
+}
+
+.container .row:first-child {
+    font-size: 20px;
+    color: darkslategray;
+    margin-bottom: 10px;
+    border-bottom: thin solid grey; 
+}
+
+.col span {
+    cursor: pointer;
+}
+
