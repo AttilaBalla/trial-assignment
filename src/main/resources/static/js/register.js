@@ -37,8 +37,6 @@ window.onload = function() {
             registerAlert.show();
             return;
         }
-
-        console.log(data);
         
         $.ajax({
             type: 'POST',

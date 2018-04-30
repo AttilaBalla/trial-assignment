@@ -47,7 +47,6 @@ function getusers() {
             else {
                 $col = $("<div/>").addClass("col").html("No users found at this time.");
                 $("#user_rows").empty().append($col);
-                console.log("No users found at this time!");
             } 
         },
         error: function(response) {
