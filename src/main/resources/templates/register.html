@@ -9,27 +9,29 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form name="login" th:action="@{/login}" method="post" class="form-signin">
-                    <div class="modal-body"> 
+                <form class="register_form">
+                    <div class="modal-body">
+                        <div class="alert register_alert" role="alert">
+                        </div>
                         <div class="input_field">
                             <label for="username" class="sr-only">name</label>
-                            <input type="text" id="username" name="username" class="form-control" placeholder="Your name" required="true" /> 
+                            <input type="text" id="register_username" name="userName" class="form-control" placeholder="Your name" required="true" /> 
                         </div>
                         <div class="input_field">
                             <label for="email" class="sr-only">e-mail address</label>
-                            <input type="text" id="email" name="email" class="form-control" placeholder="Your e-mail address" required="true" /> 
+                            <input type="text" id="email" name="userEmail" class="form-control" placeholder="Your e-mail address" required="true" /> 
                         </div>
                             <div class="input_field">
                             <label for="password" class="sr-only">password</label> 
-                            <input type="password" id="password" name="password" class="form-control" placeholder="Your password" required="true" />
+                            <input type="password" id="register_password" name="userPassword" class="form-control" placeholder="Your password" required="true" />
                         </div>
                         <div class="input_field">
                             <label for="password_again" class="sr-only">password again</label>
-                            <input type="password" id="password_again" name="password_again" class="form-control" placeholder="re-enter password" required="true" />
+                            <input type="password" id="register_password_again" name="userPasswordAgain" class="form-control" placeholder="re-enter password" required="true" />
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-orangered register_user_button">Register account</button>
+                        <button type="submit" class="btn btn-orangered">Register account</button>
                     </div>
                 </form>
             </div>

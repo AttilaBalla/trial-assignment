@@ -73,10 +73,12 @@ public class UserService implements UserDetailsService {
         String userName = userJson.getUserName();
         String userEmail = userJson.getUserEmail();
 
-        if(userRepository.findUserByUserName(userName) != null || userRepository.findUserByUserEmail(userEmail) != null) {
-            throw new IllegalArgumentException(
-                    "User with these credentials already exists!" + userEmail + ", " + userName
-            );
+        if(userRepository.findUserByUserName(userName) != null) {
+            throw new IllegalArgumentException("This username is already taken!");
+        }
+
+        if(userRepository.findUserByUserEmail(userEmail) != null) {
+            throw new IllegalArgumentException("This e-mail address is already in use!");
         }
 
         Role userRole = roleRepository.findByRoleType(RoleType.ROLE_USER);
