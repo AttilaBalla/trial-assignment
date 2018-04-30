@@ -48,6 +48,7 @@ window.onload = function() {
             
             success: function(response) {
                 if(JSON.parse(response)["success"] === true){
+                    getusers();
                     $("#register_modal").modal('hide');
                     $(".register_form").trigger("reset");
                     mainAlert.addClass("alert-success").append("Your account has been created successfully!");
