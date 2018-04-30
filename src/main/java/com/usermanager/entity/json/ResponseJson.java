@@ -9,11 +9,6 @@ public class ResponseJson {
         this.success = success;
     }
 
-    public ResponseJson(boolean success, String information) {
-        this.success = success;
-        this.information = information;
-    }
-
     public boolean isSuccess() {
         return success;
     }
