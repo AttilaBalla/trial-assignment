@@ -70,6 +70,8 @@ public class UserService implements UserDetailsService {
 
     public void registerUser(UserJson userJson) throws ConstraintViolationException, IllegalArgumentException {
 
+        validatePassword(userJson);
+
         String userName = userJson.getUserName();
         String userEmail = userJson.getUserEmail();
 
@@ -103,6 +105,20 @@ public class UserService implements UserDetailsService {
                 .stream()
                 .map(user -> ( user.getSimpleUserDetails()))
                 .collect(Collectors.toList());
+    }
+
+    private void validatePassword(UserJson userJson) throws IllegalArgumentException {
+
+        String password = userJson.getUserPassword();
+        String passwordAgain = userJson.getUserPasswordAgain();
+
+        if(!password.equals(passwordAgain)) {
+            throw new IllegalArgumentException("Passwords must match!");
+        }
+
+        if(password.length() < 6) {
+            throw new IllegalArgumentException("Password has to contain at least 6 characters!");
+        }
     }
 
     @Transactional
