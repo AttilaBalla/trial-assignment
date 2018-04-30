@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="register" class="modal fade" id="register_modal" tabindex="-1" role="dialog" aria-labelledby="register_modal_label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="register_modal_label">Register a new user account</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form class="register_form">
+                    <div class="modal-body">
+                        <div class="alert register_alert" role="alert">
+                        </div>
+                        <div class="input_field">
+                            <label for="username" class="sr-only">name</label>
+                            <input type="text" id="register_username" name="userName" class="form-control" placeholder="Your name" required="true" /> 
+                        </div>
+                        <div class="input_field">
+                            <label for="email" class="sr-only">e-mail address</label>
+                            <input type="text" id="email" name="userEmail" class="form-control" placeholder="Your e-mail address" required="true" /> 
+                        </div>
+                            <div class="input_field">
+                            <label for="password" class="sr-only">password</label> 
+                            <input type="password" id="register_password" name="userPassword" class="form-control" placeholder="Your password" required="true" />
+                        </div>
+                        <div class="input_field">
+                            <label for="password_again" class="sr-only">password again</label>
+                            <input type="password" id="register_password_again" name="userPasswordAgain" class="form-control" placeholder="re-enter password" required="true" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-orangered">Register account</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</html>

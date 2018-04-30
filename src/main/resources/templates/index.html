@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="head :: head"/>
+    <body>
+        <div id="main_container">
+            <nav class="navbar navbar-expand-sm">
+                <div id="nav_title">
+                    <h2>User Manager</h2>
+                    <h6>Kulcs-Soft trial assignment</h6>
+                </div>
+                <div class="navbar-nav ml-auto">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-toggle="modal" data-target="#register_modal">Register</a>
+                        </li>
+                    </ul>       
+                </div>
+            </nav>
+            <div class="alert main_alert" role="alert">
+            </div>
+            <div id="user_list" class="p-3">
+                <div id="user_header" class="container">
+                    <div class="row">
+                        <div class="col">
+                        User ID
+                        </div>
+                        <div class="col">
+                        User name
+                        </div>
+                        <div class="col">
+                        E-mail address
+                        </div>
+                        <div class="col">
+                        Actions
+                        </div>
+                    </div>
+                </div>
+                <div id="user_rows" class="container">
+                </div>
+            </div>
+        </div>
+       <!-- Register Modal -->
+        <div th:replace="register :: register"></div>
+        <!-- delete confirm Modal -->
+        <div th:replace="delete :: delete"></div>   
+    </body>
+</html>
