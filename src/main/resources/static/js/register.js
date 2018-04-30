@@ -12,7 +12,7 @@ window.onload = function() {
         }
 
     function validateForm(data) {
-        if(data["userPassword"] != data["userPasswordAgain"]) {
+        if(data["userPassword"] !== data["userPasswordAgain"]) {
             registerAlert.addClass("alert-danger").html("Passwords must match!");
             return false;
         }

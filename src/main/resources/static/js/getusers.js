@@ -17,12 +17,20 @@ function getusers() {
                 </div>
                 <div class="col">
                     <a class="text-dark" href="#" data-toggle="modal" data-target="#delete_modal">
-                        <span class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Delete"></span>
+                        <span class="fa fa-trash delete_icon" aria-hidden="true" data-userId="`+ user["id"] +`" data-toggle="tooltip" data-placement="top" title="Delete"></span>
                     </a>
                 </div>
             `);
         
         $container.append($row);
+    }
+
+    function setDeleteTriggers() {
+        $(".delete_icon").click(function() {
+            $(".delete_user_button").attr({
+                "data-userid": this.dataset.userid
+            });
+        });
     }
 
     $.ajax({
@@ -32,9 +40,9 @@ function getusers() {
 
             if(JSON.parse(response).length > 0) {
                 jQuery.each(JSON.parse(response), function(i, user) {
-                    console.log(user);
                     populateUserTable(i, user);
                 });
+                setDeleteTriggers();
             } 
             else {
                 console.log("No users found at this time!");
