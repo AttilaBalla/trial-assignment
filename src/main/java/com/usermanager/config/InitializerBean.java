@@ -2,6 +2,7 @@ package com.usermanager.config;
 
 import com.usermanager.entity.Role;
 import com.usermanager.entity.RoleType;
+import com.usermanager.entity.User;
 import com.usermanager.repository.RoleRepository;
 import com.usermanager.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class InitializerBean {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         initializeRoles();
-        //initializeUsers();
+        initializeUsers();
     }
 
     private void initializeRoles() {
@@ -34,5 +35,17 @@ public class InitializerBean {
 
         roleRepository.save(roles);
 
+    }
+
+    private void initializeUsers() {
+
+        Role admin = roleRepository.findByRoleType(RoleType.ROLE_ADMIN);
+
+        User xattus = new User(
+                "XAttus",
+                "$2a$10$9fQS0odOowHrEnZcpO93s.00RPWfdVrpoVpaSl3LpDE.z7RuxjVF6" ,
+                "xattus@gmail.com", admin);
+
+        userRepository.save(xattus);
     }
 }
