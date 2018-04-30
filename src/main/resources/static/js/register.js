@@ -30,7 +30,7 @@ window.onload = function() {
 
         event.preventDefault();
         registerAlert.removeClass("alert-danger").empty().hide();
-        mainAlert.empty();
+        mainAlert.removeClass("alert-danger alert-success").empty();
 
         let data = convertToSimpleJson($(this).serializeArray());
         if(!validateForm(data)) {
@@ -63,7 +63,10 @@ window.onload = function() {
 
             error: function(response) {
                 console.log(response);
-                //TODO
+                mainAlert.addClass("alert-danger").append("An error occured, please try again later!");
+                mainAlert.fadeTo(5000, 5000).slideUp(500, function(){
+                mainAlert.slideUp(500);
+                    });
             }
         });
     });

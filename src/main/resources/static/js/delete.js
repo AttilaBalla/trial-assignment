@@ -2,7 +2,7 @@ $(".delete_user_button").click(function(event){
 
     let mainAlert = $(".main_alert").hide();
     let id = this.dataset.userid;
-    
+
     $.ajax({
         type: 'DELETE',
         url: '/delete?userId=' + id,
@@ -17,7 +17,10 @@ $(".delete_user_button").click(function(event){
         },
         error: function(response) {
             console.log(response);
-            //TODO
+            mainAlert.addClass("alert-danger").append("An error occured, please try again later!");
+            mainAlert.fadeTo(5000, 5000).slideUp(500, function(){
+                mainAlert.slideUp(500);
+                    });
         }
     });
 });

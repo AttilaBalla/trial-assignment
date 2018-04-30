@@ -45,12 +45,17 @@ function getusers() {
                 setDeleteTriggers();
             } 
             else {
+                $col = $("<div/>").addClass("col").html("No users found at this time.");
+                $("#user_rows").empty().append($col);
                 console.log("No users found at this time!");
             } 
         },
         error: function(response) {
             console.log(response);
-            //TODO
+            mainAlert.addClass("alert-danger").append("An error occured, please try again later!");
+            mainAlert.fadeTo(5000, 5000).slideUp(500, function(){
+                mainAlert.slideUp(500);
+                    });
         }
     });
 }
