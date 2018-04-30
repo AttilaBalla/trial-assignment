@@ -16,6 +16,13 @@ body {
     text-align: center;
 }
 
+#user_header {
+    font-size: 20px;
+    color: darkslategray;
+    margin-bottom: 10px;
+    border-bottom: thin solid grey; 
+}
+
 .navbar {
     display: flex;
     align-items: center;
@@ -38,10 +45,6 @@ body {
     color: yellow;
 }
 
-#user_cards {
-    padding: 30px;
-}
-
 .btn-orangered {
     color: #fff;
     background-color: orangered;
@@ -62,13 +65,6 @@ body {
 
 .input_field input {
     font-size: 20px;
-}
-
-.container .row:first-child {
-    font-size: 20px;
-    color: darkslategray;
-    margin-bottom: 10px;
-    border-bottom: thin solid grey; 
 }
 
 .col span {
